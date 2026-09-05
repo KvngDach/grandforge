@@ -1,0 +1,101 @@
+// ─── 12-Week Training Curriculum ────────────────────────────────────────────
+export const CURRICULUM = [
+  { week: 1,  endgame: "King & Pawn Endings",       opening: "Italian Game (White)",         endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 2,  endgame: "The Philidor Position",      opening: "Sicilian Defence (Black)",     endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 3,  endgame: "The Lucena Position",        opening: "Queen's Gambit (White)",       endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 4,  endgame: "Rook + Pawn vs Rook",        opening: "French Defence (Black)",       endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 5,  endgame: "Bishop Endings",             opening: "London System (White)",        endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 6,  endgame: "Knight Endings",             opening: "Caro-Kann (Black)",            endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 7,  endgame: "Opposite-Colour Bishops",   opening: "King's Indian (Black)",        endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 8,  endgame: "Queen Endings",              opening: "Ruy López (White)",            endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 9,  endgame: "Complex Rook Endings",       opening: "Nimzo-Indian (Black)",         endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 10, endgame: "Pawn Structures",            opening: "English Opening (White)",      endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 11, endgame: "Minor Piece Battles",        opening: "Scandinavian (Black)",         endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+  { week: 12, endgame: "Mixed Endgame Practice",     opening: "Dutch Defence (Black)",        endgameUrl: "https://lichess.org/study/cSPAQgFa", openingUrl: "https://lichess.org/study/XtFCFYlj" },
+];
+
+// ─── The 5 Daily Stages ──────────────────────────────────────────────────────
+export const STAGES = [
+  {
+    id: "tactics",
+    label: "Tactics",
+    sub: "50 Puzzles",
+    icon: "⚡",
+    color: "#c9a84c",
+    type: "count",
+    target: 50,
+    desc: "Complete 50 tactical puzzles on Lichess to sharpen pattern recognition.",
+    tip: "Find the idea before calculating every line. Patterns > brute force.",
+  },
+  {
+    id: "endgame",
+    label: "Endgame",
+    sub: "10 min minimum",
+    icon: "♚",
+    color: "#5b9bd5",
+    type: "timer",
+    duration: 600,
+    desc: "Study this week's endgame technique. You are locked in for 10 minutes.",
+    tip: "King activity is paramount in the endgame. Activate it early.",
+  },
+  {
+    id: "game",
+    label: "Play",
+    sub: "10+0 Rapid",
+    icon: "⚔",
+    color: "#e05a5a",
+    type: "manual",
+    desc: "Play a 10-minute rapid game on Lichess. Apply everything you've studied today.",
+    tip: "Avoid autopilot. Think on every move, even if you know the line.",
+  },
+  {
+    id: "analyse",
+    label: "Analyse",
+    sub: "5 min minimum",
+    icon: "◈",
+    color: "#9b7de8",
+    type: "timer",
+    duration: 300,
+    desc: "Review your game yourself before using the engine. Find your own mistakes first.",
+    tip: "Mark the moments you were uncertain. Those are your real lessons.",
+  },
+  {
+    id: "study",
+    label: "Study",
+    sub: "10 min minimum",
+    icon: "◉",
+    color: "#4caf7d",
+    type: "timer",
+    duration: 600,
+    desc: "Study this week's opening plans and key ideas — not lines to memorise.",
+    tip: "Understanding the idea behind a move beats memorising the move itself.",
+  },
+];
+
+export const QUOTES = [
+  "Chess is not about the next move, but about the plan. — Tartakower",
+  "The hardest game to win is a won game. — Emanuel Lasker",
+  "Every chess master was once a beginner. — Irving Chernev",
+  "Chess is the art of analysis. — Mikhail Botvinnik",
+  "A bad plan is better than no plan. — Frank Marshall",
+  "Chess demands total concentration and a love for the game. — Bobby Fischer",
+  "In life, as in chess, forethought wins. — Charles Buxton",
+  "The game of chess is not merely an idle amusement. — Benjamin Franklin",
+];
+
+// Theme colours (single source of truth)
+export const C = {
+  bg:       "#09090c",
+  surface:  "#111115",
+  card:     "#16161c",
+  border:   "#222228",
+  gold:     "#c9a84c",
+  goldFade: "#c9a84c22",
+  text:     "#ede8df",
+  muted:    "#6b6760",
+  dim:      "#2e2e35",
+  green:    "#4caf7d",
+  blue:     "#5b9bd5",
+  purple:   "#9b7de8",
+  red:      "#e05a5a",
+};
