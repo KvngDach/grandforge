@@ -1,0 +1,16 @@
+{
+  "name": "GrandForge",
+  "short_name": "GrandForge",
+  "description": "Your Daily Chess Training Ritual",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090c",
+  "theme_color": "#09090c",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♟</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
