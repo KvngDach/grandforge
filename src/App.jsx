@@ -6,45 +6,68 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Session   from "./pages/Session.jsx";
 import Complete  from "./pages/Complete.jsx";
 
-// ── Auth context ──────────────────────────────────────────────────────────────
 const AuthCtx = createContext(null);
 export const useAuth = () => useContext(AuthCtx);
 
 function AuthProvider({ children }) {
-  const [auth,  setAuth]  = useState(null);  // { session, dbUser }
+  const [auth,  setAuth]  = useState(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // Check for existing session on load
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (session) {
-        try {
-          const dbUser = await getUser(session.user.id);
-          setAuth({ session, dbUser });
-        } catch {
-          setAuth(null);
-        }
-      }
-      setReady(true);
-    });
+    let mounted = true;
 
-    // Listen for login/logout events
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (session) {
+    const init = async () => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+
+        if (error) {
+          console.error("getSession error:", error);
+          if (mounted) setReady(true);
+          return;
+        }
+
+        if (session?.user) {
           try {
             const dbUser = await getUser(session.user.id);
-            setAuth({ session, dbUser });
-          } catch {
-            setAuth(null);
+            if (mounted) setAuth({ session, dbUser });
+          } catch (e) {
+            console.error("getUser error:", e);
+            // Auth session exists but no DB record — sign out and reset
+            await supabase.auth.signOut();
+            if (mounted) setAuth(null);
           }
-        } else {
-          setAuth(null);
+        }
+      } catch (e) {
+        console.error("Auth init error:", e);
+      } finally {
+        if (mounted) setReady(true);
+      }
+    };
+
+    init();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (event === "SIGNED_OUT") {
+          if (mounted) setAuth(null);
+          return;
+        }
+        if (session?.user) {
+          try {
+            const dbUser = await getUser(session.user.id);
+            if (mounted) setAuth({ session, dbUser });
+          } catch (e) {
+            console.error("onAuthStateChange getUser error:", e);
+            if (mounted) setAuth(null);
+          }
         }
       }
     );
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const logout = async () => {
@@ -53,8 +76,9 @@ function AuthProvider({ children }) {
   };
 
   if (!ready) return (
-    <div style={{ minHeight:"100vh", background:"#09090c", display:"flex", alignItems:"center", justifyContent:"center" }}>
-      <span style={{ color:"#6b6760", fontFamily:"'DM Sans',sans-serif" }}>Loading…</span>
+    <div style={{ minHeight:"100vh", background:"#09090c", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1rem" }}>
+      <div style={{ fontSize:"2rem", color:"#c9a84c" }}>♟</div>
+      <span style={{ color:"#6b6760", fontFamily:"'DM Sans',sans-serif", fontSize:"0.85rem" }}>Loading GrandForge…</span>
     </div>
   );
 
